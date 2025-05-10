@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подтверждение заказа</title>
+</head>
+<body>
+    <div >
+        <form action="http://localhost:5003/confirm_order" method="post">
+            <input type="hidden" name="create_order" value="yes">
+            <input type="hidden" name="user_id" value="{{ current_user_id }}">
+            <input type="hidden" name="products_json" id="products_json">
+          
+          
+            <input class="" type="text" name="payment_method" value="" placeholder="Введите метод оплаты">
+            <input class="" type="text" name="place_delivery" value="" placeholder="Введите адрес доставки">
+            
+            <button class="" type="submit">Оформить заказ</button>
+        </form>
+        <p>Общая стоимость: {{full_price}} руб.</p>
+    </div>
+    <div>
+
+        {% for product in list_products %}
+        <div style="border: 2px solid rgb(170, 170, 170);">
+            <p>{{product.name}}</p>
+            <p>Количество: {{product.count}} шт.</p>
+            <p>Стоимость: {{product.count * product.price}} руб.</p>
+        </div>
+        {% endfor %}
+
+    </div>
+    <script>
+        document.getElementById('products_json').value = JSON.stringify({{ list_products|tojson }});
+    </script>
+</body>
+</html>
