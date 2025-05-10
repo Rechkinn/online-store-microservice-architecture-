@@ -1,0 +1,9 @@
+$env:PYTHONPATH = 'C:\Users\alred\PycharmProjects\microshop\{название_сервиса}'; $env:FLASK_APP = 'order_service.app'; flask db init
+
+flask db init
+
+flask db migrate -m "Initial orders schema"
+
+flask db upgrade
+
+cd {название_сервиса}
